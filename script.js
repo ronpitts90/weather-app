@@ -32,7 +32,7 @@ $(document).ready(function(){
 function show(data){
     return "<h2>Name: "+ data.city.name +"</h2>" + 
            "<h2>todays date: "+ +"</h2>" +
-           "<h2>description: <img src= http://openweathermap.org/img/wn/ "+ data.weather.icon +" @2x.png> "+ data.weather.description +" </h2>" +
+           "<h2>description: <img 'src= http://openweathermap.org/img/wn/ "+ data.weather.icon +" @2x.png'> "+ data.weather.description +" </h2>" +
            "<h2>temperature: "+ data.temperature.value +"&deg;F</h2>" +
            "<h2>humidity: "+ data.humidity.value +"%</h2>" +
            "<h2>wind speed: "+ data.wind.speed.value +"m/s</h2>"; 
