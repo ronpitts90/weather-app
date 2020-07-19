@@ -3,9 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather App</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+<title>Weather App</title>
 </head>
 <body>
-    
+    <div class="jumbotron" style="margin-bottom: 0px; color: white; background-color: cadetblue;">
+        <h2 class="text-center" style="font-size: 50px; font-weight: 600px;">Get Current Weather</h2>
+    </div>
+
+    <div class="container">
+        <div class="row" style="margin-bottom: 20px;"><h3 class="text-center text-primary">Enter City Name</h3>
+            <span id="error"></span>
+        </div>
+
+        <div class="row form-group form-inline" id="rowDiv">
+            <input type="text" name="city" id="city" class="form-control" placeholder="Enter City">
+            <button id="submitWeather" class="btn btn-primary">Search City</button>
+        </div>
+        <div id="show"></div>
+    </div>
+
+
+    <script src="script.js"></script>
 </body>
 </html>
