@@ -1,44 +1,79 @@
 
 
-$(document).ready(function(){
+$(document).ready(function () {
+    var lastSearch;
 
     // click event for weather and grabbing weather data in after button is clicked
-     $('#submitWeather').click(function(){
+    $('#submitWeather').click(function () {
 
-        var city = $("#city").val(); 
+        var city = $("#city").val();
 
-        if(city!=' '){
-            $.ajax({
-                 url: 'http://api.openweathermap.org/data/2.5/weather?q=' + city + "&units=imperial" + "&APPID=f20741f8dbd707c14900e7828566a854",
-                 method: "GET",
-                 datatype:"JSON",
-                 success: function(data){
-                     var widget = show(data);
-                     $("#show").html(widget); 
-                      $("#city").val(' '); 
+        if (city != ' ') {
+          searchCity(city)
 
-                      var lastSearch = localStorage.getItem("lastSeacrh");
-                      localStorage.setItem("lastSearch", JSON.Stringify(response))
-                    
-                     }
-            });
-
-        }else {
+        } else {
             $("#error").html("Field Needs A City");
         }
 
-     });
+    });
 });
 
-// function that displays recently fetched data 
+// function that displays current weather conditions
 
-function show(data){
-    return "<h2>Name: "+ data.name +"</h2>" + 
-           "<h2>todays date: "+ +"</h2>" +
-           "<h2>description: <img 'src= http://openweathermap.org/img/wn/ "+ data.weather.icon +" @2x.png'> "+ data.weather.description +" </h2>" +
-           "<h2>temperature: "+ data.temperature.value +"&deg;F</h2>" +
-           "<h2>humidity: "+ data.humidity.value +"%</h2>" +
-           "<h2>wind speed: "+ data.wind.speed.value +"m/s</h2>"; 
-           
+function searchCity(city){
+    $.ajax({
+        url: 'http://api.openweathermap.org/data/2.5/weather?q=' + city + "&units=imperial" + "&APPID=f20741f8dbd707c14900e7828566a854",
+        method: "GET",
+        datatype: "JSON",
+        success: function (data) {
+            var widget = show(data);
+            console.log
+            $("#show").html(widget);
+            $("#city").val(' ');
+
+            lastSearch = JSON.parse(localStorage.getItem("lastSearch"));
+            if (!lastSearch) {
+                lastSearch = []
+            }
+
+            if (lastSearch.indexOf(city) === -1) {
+                lastSearch.push(city)
+                console.log(lastSearch)
+                localStorage.setItem("lastSearch", JSON.stringify(lastSearch));
+                //   localStorage.setItem("lastSearch", JSON.Stringify(response))
+            }
+        }
+    });
+
+    
+
 }
+
+function show(data) {
+    console.log(data);
+    return "<h2>City: " + data.name + "</h2>" +
+        "<h2>Today's date:" + new Date().toLocaleDateString() + "</h2>" +
+        "<h2> Condition:<img src= http://openweathermap.org/img/w/" + data.weather[0].icon + ".png></img></h2>" +
+        "<h2>temperature: " + data.main.temp + "&deg;F</h2>" +
+        "<h2>humidity: " + data.main.humidity + "%</h2>" +
+        "<h2>wind speed: " + data.wind.speed + "m/s</h2>";
+
+}
+
+// function showHistory(){
+// lastSearch= JSON.parse(localStorage.getItem("lastSearch"));
+
+// for (var i=0; i<lastSearch.length;i++){
+//     $("#history").append("<button class='btnhist'>"+ lastSearch[i]+"</button>")
+// }
+// $(".btnhist").on("click", function(){
+
+//     console.log("clicked: ", this)
+// searchCity($(this).text())
+//     // search for the city get the city inside the button and call searchcity()
+// })
+
+// }
+
+// showHistory()
 
