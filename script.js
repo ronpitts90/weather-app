@@ -42,6 +42,16 @@ function searchCity(city){
                 localStorage.setItem("lastSearch", JSON.stringify(lastSearch));
                 //   localStorage.setItem("lastSearch", JSON.Stringify(response))
             }
+            $.ajax({
+                url: 'api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=f20741f8dbd707c14900e7828566a854',
+                method:"GET",
+                datatype: "JSON",
+                success: function (data) {
+
+                    
+                    // logic for the second API call here
+                }
+            });
         }
     });
 
